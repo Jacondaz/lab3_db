@@ -3,6 +3,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,6 +14,8 @@ public class Main {
         Dao<Student, Integer> studentDao = DaoManager.createDao(connect, Student.class);
         Dao<Student2, Integer> studentDao2 = DaoManager.createDao(connect, Student2.class);
 
+//        searchManyStudents(10, 15, studentDao);
+
 //        for (Student student: studentDao){
 //            System.out.println("ID: " + student.getId() + " Name: " + student.getName() + " Adress: " + student.getAdress() + " Age: " + student.getAge());
 //        }
@@ -20,6 +23,7 @@ public class Main {
 //        for (Student2 student: studentDao2){
 //            System.out.println("ID: " + student.getId() + " SecondName: " + student.getSecondname() + " Index: " + student.getIndex());
 //        }
+
 //        Student AddStudent = new Student(15, "Ilya", "Skolkovo st.", 20);
 //        studentDao.create(AddStudent);
 //        System.out.println("Студент добавлен");
@@ -64,4 +68,14 @@ public class Main {
 
         connect.close();
     }
+    public static void searchManyStudents(int minAge, int maxAge, Dao<Student, Integer> studentDao){
+        for(Student student : studentDao) {
+            if (student.getAge() >= minAge) {
+                if (student.getAge() <= maxAge) {
+                    System.out.println("Id: " + student.getName() + " Name: " + student.getName() + " Age: " + student.getAge() + " Adress: " + student.getAdress());
+                }
+            }
+        }
+    }
 }
+
